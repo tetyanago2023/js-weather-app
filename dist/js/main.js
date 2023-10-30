@@ -19,7 +19,9 @@ const initApp = () => {
 
     // load default weather
     loadWeather();
-}
+};
+
+document.addEventListener("DOMContentLoaded", initApp);
 
 const getGeoWeather = (event) => {
     if (event && event.type === "click") {
@@ -51,9 +53,9 @@ const loadWeather = (event) => {
     if (!savedLocation && !event) return getGeoWeather();
     if (!savedLocation && event.type === "click") {
         displayError(
-            "No home location saved.",
+            "No Home Location Saved.",
             "Sorry. Please save your home location first."
-        )
+        );
     } else if (savedLocation && !event) {
         displayHomeLocationWeather(savedLocation);
     } else {
@@ -61,20 +63,20 @@ const loadWeather = (event) => {
         addSpinner(homeIcon);
         displayHomeLocationWeather(savedLocation);
     }
+};
 
-    const displayHomeLocationWeather = (home) => {
-        if (typeof home === "string") {
-           const locationJson = JSON.parse(home);
-           const myCoordObj = {
-               lat: locationJson.lat,
-               lon: locationJson.lon,
-               name: locationJson.name,
-               unit: locationJson.unit
-           };
-           setLocationObject(currentLoc, myCoordObj);
-           updateDataAndDisplay(currentLoc);
-        }
-    };
+const displayHomeLocationWeather = (home) => {
+    if (typeof home === "string") {
+        const locationJson = JSON.parse(home);
+        const myCoordObj = {
+            lat: locationJson.lat,
+            lon: locationJson.lon,
+            name: locationJson.name,
+            unit: locationJson.unit
+        };
+        setLocationObject(currentLoc, myCoordObj);
+        updateDataAndDisplay(currentLoc);
+    }
 };
 
 const updateDataAndDisplay = async (locationObj) => {
@@ -82,5 +84,3 @@ const updateDataAndDisplay = async (locationObj) => {
     // const weatherJson = await getWeatherFromCoords(locationObj);
     // if (weatherJson) updateDisplay(weatherJson, locationObj);
 };
-
-document.addEventListener("DOMContentLoaded", initApp);

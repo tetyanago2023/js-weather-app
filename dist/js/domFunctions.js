@@ -296,3 +296,30 @@ const createDailyForecastDivs = (dayWeather) => {
     return [dayAbbreviation, dayIcon, dayHigh, dayLow];
 };
 
+const getDayAbbreviation = (data) => {
+    const dateObj = new Date(data * 1000);
+    const utcString = dateObj.toUTCString();
+    return utcString.slice(0, 3).toUpperCase();
+};
+
+const createDailyForecastIcon = (icon, altText) => {
+    const img = document.createElement("img");
+    if (window.innerWidth < 768 || window.innerHeight < 1025) {
+        img.src = `https://openweathermap.org/img/wn/${icon}.png`;
+    } else {
+        img.src = `https://openweathermap.org/img/wn/${icon}@2x.png`;
+    }
+    img.alt = altText;
+    return img;
+};
+
+const displayDailyForecast = (dfArray) => {
+    const dayDiv = createElem("div", "forecastDay");
+    dfArray.forEach((el) => {
+        dayDiv.appendChild(el);
+    });
+    const dailyForecastContainer = document.getElementById(
+        "dailyForecast__contents"
+    );
+    dailyForecastContainer.appendChild(dayDiv);
+};

@@ -10,6 +10,7 @@ import {
     displayApiError,
     displayError,
     setPlaceholderText,
+    updateDisplay,
     updateScreenReaderConfirmation
 } from "./domFunctions.js";
 import CurrentLocation from "./CurrentLocation.js";
